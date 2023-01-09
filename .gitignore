@@ -1,11 +1,12 @@
 
 # sbt
-target/
+.bsp/
 boot/
 lib_managed/
-src_managed/
+null/
 project/plugins/project/
-.bsp/
+src_managed/
+target/
 
 # Scala-IDE specific
 .scala_dependencies
@@ -20,9 +21,9 @@ project/plugins/project/
 .settings/org.eclipse.core.resources.prefs
 
 # VS Code
-.vscode/
 .bloop
 .metals
+.vscode/
 
 # GitKraken
 \.classpath
@@ -38,4 +39,3 @@ project/plugins/project/
 
 # Application
 *.log
-

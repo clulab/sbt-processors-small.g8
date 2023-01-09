@@ -6,16 +6,16 @@ description := "The $name$ project implements the $package$ package including th
 
 // Last checked 2021-12-31
 val scala11 = "2.11.12" // up to 2.11.12
-val scala12 = "2.12.15" // up to 2.12.14
-val scala13 = "2.13.7"  // up to 2.13.7
-val scala3  = "3.1.0"   // up to 3.1.0
+val scala12 = "2.12.17" // up to 2.12.17
+val scala13 = "2.13.10" // up to 2.13.10
+val scala3  = "3.2.1"   // up to 3.2.1
 
 ThisBuild / crossScalaVersions := Seq(scala12, scala11, scala13, scala3)
 ThisBuild / scalaVersion := crossScalaVersions.value.head
 
 resolvers ++= Seq(
 //  Resolvers.localResolver,  // Reserve for Two Six.
-//  Resolvers.clulabResolver, // glove
+ Resolvers.clulabResolver, // glove
 //  Resolvers.jitpackResolver // Ontologies
 )
 
@@ -26,13 +26,16 @@ libraryDependencies ++= {
       case _ => Seq("org.scala-lang.modules" %% "scala-parallel-collections" % "1.0.4") // up to 1.0.4
     }
   }
+  val processorsVersion = "8.5.2"
 
   Seq(
+    // processors
+    "org.clulab"                %% "processors-main"          % processorsVersion,
     // local logging
-    "ch.qos.logback"              % "logback-classic"         % "1.2.10",       // as of 2021-12-31 up to 1.2.10
+    "ch.qos.logback"              % "logback-classic"         % "1.2.8",        // as of 2021-12-31 up to 1.2.10
     "com.typesafe.scala-logging" %% "scala-logging"           % "3.9.4",        // as of 2021-12-31 up to 3.9.4
     // config
-    "com.typesafe"                % "config"                  % "1.4.1",        // as of 2021-12-31 up to 1.4.1
+    "com.typesafe"                % "config"                  % "1.3.1",        // as of 2021-12-31 up to 1.4.1
     // scala
     "org.scala-lang.modules"     %% "scala-collection-compat" % "2.6.0",        // as of 2021-12-31 up to 2.6.0
     "org.scalatest"              %% "scalatest"               % "3.2.10" % Test // as of 2021-12-31 up to 3.2.10

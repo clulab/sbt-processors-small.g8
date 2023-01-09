@@ -4,7 +4,7 @@
 lazy val root = (project in file("."))
   .enablePlugins(ScriptedPlugin)
   .settings(
-    name := "sbt-project-small",
+    name := "sbt-processors-small",
     Test / test := {
       val _ = (Test / g8Test).toTask("").value
     },
