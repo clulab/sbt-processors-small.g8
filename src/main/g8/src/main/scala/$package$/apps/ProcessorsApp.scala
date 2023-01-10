@@ -1,5 +1,6 @@
 package $package$.apps
 
+import org.clulab.dynet.Utils
 import org.clulab.processors.Document
 import org.clulab.processors.clu.CluProcessor
 import org.clulab.struct.DirectedGraphEdgeIterator
@@ -16,14 +17,15 @@ object ProcessorsApp extends $class$App {
   logger.info(classMessage)
 
   // Create the processor.  Any processor works here!
-  val processors = new CluProcessor()
+  Utils.initializeDyNet()
+  val processor = new CluProcessor()
   // The actual work is done here.
   val document = processor.annotate("John Smith went to China. He visited Beijing on January 10th, 2013.")
 
   // You are basically done.  The rest of this code simply prints out the annotations.
 
   // Let's print the sentence-level annotations.
-  for ((sentence, sentenceIndex) <- doc.sentences.zipWithIndex) {
+  for ((sentence, sentenceIndex) <- document.sentences.zipWithIndex) {
     println("Sentence #" + sentenceIndex + ":")
     println("Tokens: " + mkString(sentence.words))
     println("Start character offsets: " + mkString(sentence.startOffsets))
@@ -54,11 +56,11 @@ object ProcessorsApp extends $class$App {
   }
 
   // Let's print the coreference chains.
-  doc.coreferenceChains.foreach { chains =>
+  document.coreferenceChains.foreach { chains =>
     for (chain <- chains.getChains) {
       println("Found one coreference chain containing the following mentions:")
       for (mention <- chain) {
-        val text = doc.sentences(mention.sentenceIndex).words
+        val text = document.sentences(mention.sentenceIndex).words
             .slice(mention.startOffset, mention.endOffset).mkString("[", " ", "]")
         // Note that all these offsets start at 0, too.
         println("\tsentenceIndex: " + mention.sentenceIndex +
