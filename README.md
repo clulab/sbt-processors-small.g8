@@ -1,7 +1,7 @@
 <!-- [![Build Status](https://travis-ci.org/clulab/sbt-processors-small.g8.svg?branch=main)](https://travis-ci.org/clulab/sbt-processors-small.g8) -->
 [![Build Status](https://github.com/clulab/sbt-processors-small.g8/workflows/sbt-processors-small%20CI/badge.svg)](https://github.com/clulab/sbt-processors-small.g8/actions)
 
-# sbt-project-small.g8
+# sbt-processors-small.g8
 
 This is a [Giter8](http://foundweekends.org/giter8) template for creating a small `sbt` project for a Scala application that uses [processors](https://github.com/clulab/processors) as a library dependency.  It is specifically for the  [CLU Lab](http://github.com/clulab) because it includes URLs to the lab's [Artifactory](https://artifactory.clulab.org/artifactory/webapp/#/home) and [Sonatype](https://oss.sonatype.org/index.html#nexus-search;quick~clulab) servers, which wouldn't work for other groups, and it uses conventions and practices that are particular to this lab.  For a small project, all the code is contained in the root directory.
 
