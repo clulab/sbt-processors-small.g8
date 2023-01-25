@@ -7,3 +7,13 @@
 # $name$
 
 The $name$ project implements the $package$ package including the $class$ class.
+
+It also includes starter code in `src/main/scala/org/clulab/odinstarter/OdinStarter.scala` and
+resources in `src/main/resources/org/clulab/odinstarter`.  You can run the starter code with
+the command
+```
+sbt runMain org.clulab.odinstarter.OdinStarter
+```
+
+Any useful parts of the starter code should eventually be migrated to $package$.$class$
+and the resources to directories particular to this project.
