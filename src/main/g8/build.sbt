@@ -26,7 +26,7 @@ libraryDependencies ++= {
       case _ => Seq("org.scala-lang.modules" %% "scala-parallel-collections" % "1.0.4") // up to 1.0.4
     }
   }
-  val processorsVersion = "8.5.2"
+  val processorsVersion = "8.5.3"
 
   Seq(
     // processors
