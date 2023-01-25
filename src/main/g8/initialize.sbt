@@ -10,9 +10,9 @@ import org.clulab.sbt.BuildUtils
 // See https://stackoverflow.com/questions/19208942/enforcing-java-version-for-scala-project-in-sbt
 ThisBuild / initialize := {
   val _ = initialize.value // Run the previous initialization.
-  val required = "1.8"
+  val required = Set("1.8", "11")
   val current  = sys.props("java.specification.version")
-  val approved = current == required
+  val approved = required(current)
 
   // To stop sbt in its tracks, make this assumption.
   // assume(approved)
@@ -20,5 +20,5 @@ ThisBuild / initialize := {
   if (approved)
     sLog.value.info(s"Java \$current was detected and approved.")
   else
-    sLog.value.error(s"Unsupported Java version: Project requires \$required but found \$current instead.")
+    sLog.value.warn(s"Java \$current was dectected where one of \$required is preferred.")
 }
