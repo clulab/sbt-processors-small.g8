@@ -8,7 +8,7 @@ description := "The $name$ project implements the $package$ package including th
 val scala11 = "2.11.12" // up to 2.11.12
 val scala12 = "2.12.17" // up to 2.12.17
 val scala13 = "2.13.10" // up to 2.13.10
-val scala3  = "3.2.1"   // up to 3.2.1
+val scala3  = "3.1.3"   // up to 3.2.1
 
 ThisBuild / crossScalaVersions := Seq(scala12, scala11, scala13, scala3)
 ThisBuild / scalaVersion := crossScalaVersions.value.head
@@ -26,7 +26,7 @@ libraryDependencies ++= {
       case _ => Seq("org.scala-lang.modules" %% "scala-parallel-collections" % "1.0.4") // up to 1.0.4
     }
   }
-  val processorsVersion = "8.5.2"
+  val processorsVersion = "8.5.3"
 
   Seq(
     // processors
