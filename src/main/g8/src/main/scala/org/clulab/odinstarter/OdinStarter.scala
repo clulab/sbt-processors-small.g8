@@ -10,7 +10,7 @@ import java.io.File
 
 object OdinStarter extends App {
   // When using an IDE rather than sbt, make sure the working directory for the run
-  // configuration is the subproject directory so that this location is accessible.
+  // configuration is the subproject directory so that this resourceDir is accessible.
   val resourceDir: File = new File("./src/main/resources")
   val customLexiconNer = { // i.e., Named Entity Recognizer
     val kbsAndCaseInsensitiveMatchings: Seq[(String, Boolean)] = Seq(
@@ -27,7 +27,7 @@ object OdinStarter extends App {
   }
   val processor = new CluProcessor(optionalNER = Some(customLexiconNer))
   val extractorEngine = {
-    val masterResource = "/org/clulab/odinstarter/master.yml"
+    val masterResource = "/org/clulab/odinstarter/main.yml"
     // We usually want to reload rules during development,
     // so we try to load them from the filesystem first, then jar.
     // The resource must start with /, but the file probably shouldn't.
@@ -50,21 +50,21 @@ object OdinStarter extends App {
   for (mention <- mentions)
     printMention(mention)
 
-  def printMention(mention: Mention, depth: Int = 0): Unit = {
-    val tab = "    "
-    val indent = tab * depth
+  def printMention(mention: Mention, nameOpt: Option[String] = None, depth: Int = 0): Unit = {
+    val indent = "    " * depth
+    val name = nameOpt.getOrElse("<none>")
+    val labels = mention.labels
+    val words = mention.sentenceObj.words
+    val tokens = mention.tokenInterval.map(mention.sentenceObj.words)
 
-    println(indent + "  MENTION:")
-    println(indent + "   Labels: " + mention.labels.mkString(" "))
-    println(indent + " Sentence: " + mention.sentenceObj.words.mkString(" "))
-    println(indent + "   Tokens: " + mention.tokenInterval.map(mention.sentenceObj.words).mkString(" "))
+    println(indent + "     Name: " + name)
+    println(indent + "   Labels: " + labels.mkString(" "))
+    println(indent + " Sentence: " +  words.mkString(" "))
+    println(indent + "   Tokens: " + tokens.mkString(" "))
     if (mention.arguments.nonEmpty) {
       println(indent + "Arguments:")
-      for ((name, mentions) <- mention.arguments) {
-        println(indent + tab + "     Name: " + name)
-        for (mention <- mentions)
-          printMention(mention, depth + 1)
-      }
+      for ((name, mentions) <- mention.arguments; mention <- mentions)
+        printMention(mention, Some(name), depth + 1)
     }
     println()
   }
